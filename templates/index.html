@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>downloader.wubly.run</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Syne:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d0d0d;
+            --surface: #161616;
+            --border: #2a2a2a;
+            --border-focus: #444;
+            --text: #e8e8e8;
+            --muted: #555;
+            --accent: #e8e8e8;
+            --err: #ff6b6b;
+            --ok: #6bffb8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Mono', monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 480px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 400;
+            font-size: 1.9rem;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .sub {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--muted);
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .input-row {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .input-row input {
+            flex: 1;
+            padding: 14px 16px;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.82rem;
+            outline: none;
+            letter-spacing: 0.01em;
+        }
+
+        .input-row input::placeholder {
+            color: var(--muted);
+        }
+
+        .icon-btn {
+            padding: 10px;
+            background: transparent;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.15s;
+        }
+
+        .icon-btn:hover {
+            color: var(--text);
+        }
+
+        .icon-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .icon-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .dl-btn {
+            padding: 10px 16px;
+            background: transparent;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.15s;
+        }
+
+        .dl-btn:hover {
+            color: var(--text);
+        }
+
+        .dl-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .dl-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .dl-btn .spinner-svg {
+            display: none;
+        }
+
+        .dl-btn.loading .dl-icon { display: none; }
+        .dl-btn.loading .spinner-svg { display: block; }
+
+        .spinner-svg {
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        footer {
+            margin-top: auto;
+            text-align: center;
+            font-size: 0.62rem;
+            font-family: 'DM Mono', monospace;
+            color: var(--muted);
+            line-height: 1.8;
+            letter-spacing: 0.04em;
+        }
+
+        footer a {
+            color: var(--muted);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+            transition: color 0.15s;
+        }
+
+        footer a:hover {
+            color: var(--text);
+        }
+
+        footer .sep {
+            margin: 0 8px;
+            opacity: 0.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="main">
+
+            <h1>downloader.wubly.run</h1>
+
+            <form id="f" class="input-row">
+                <button type="button" class="icon-btn paste-btn" aria-label="paste from clipboard">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 15l6 -6"/><path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464"/><path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463"/></svg>
+                </button>
+                <input type="text" name="url" id="url" placeholder="" required autocomplete="off" spellcheck="false">
+                <button type="button" id="clear" class="icon-btn" aria-label="clear" style="display:none">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg>
+                </button>
+                <button type="submit" id="btn" class="dl-btn" aria-label="download">
+                    <svg class="dl-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <svg class="spinner-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9" stroke-dasharray="14 43" stroke-dashoffset="0"/></svg>
+                </button>
+            </form>
+        </div>
+
+        <footer>
+            <div>
+                <a href="/about">about</a>
+                <span class="sep">/</span>
+                <a href="#">api</a>
+                <span class="sep">/</span>
+                <a href="#">status</a>
+            </div>
+            <div style="margin-top:12px; opacity: 0.35">© 2026 wubly</div>
+        </footer>
+    </div>
+
+    <script>
+        const f = document.getElementById('f');
+        const url = document.getElementById('url');
+        const btn = document.getElementById('btn');
+        const clearBtn = document.getElementById('clear');
+        const pasteBtn = document.querySelector('.paste-btn');
+
+        pasteBtn.onclick = async function() {
+            try {
+                const text = await navigator.clipboard.readText();
+                url.value = text.trim();
+                url.dispatchEvent(new Event('input', { bubbles: true }));
+                if (url.value) f.requestSubmit();
+            } catch (err) {
+            }
+        };
+
+        url.oninput = function() {
+            clearBtn.style.display = url.value.trim() ? 'flex' : 'none';
+        };
+
+        clearBtn.onclick = function() {
+            url.value = '';
+            clearBtn.style.display = 'none';
+            url.focus();
+        };
+
+        f.onsubmit = async function(e) {
+            e.preventDefault();
+            btn.disabled = true;
+            btn.classList.add('loading');
+
+            const form = new FormData();
+            form.append('url', url.value.trim());
+
+            try {
+                const res = await fetch('/dl', { method: 'POST', body: form });
+                const ct = res.headers.get('content-type') || '';
+
+                if (ct.includes('application/json')) {
+                    const data = await res.json();
+                    return;
+                }
+
+                const blob = await res.blob();
+                let filename = 'video.mp4';
+                const disp = res.headers.get('content-disposition');
+                if (disp) {
+                    const m = disp.match(/filename[^;]*=([^";\n]+)/);
+                    if (m) filename = m[1].trim().replace(/^["']|["']$/g, '');
+                }
+
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = filename || 'video.mp4';
+                a.click();
+                URL.revokeObjectURL(a.href);
+            } catch (err) {
+            } finally {
+                btn.disabled = false;
+                btn.classList.remove('loading');
+            }
+        };
+    </script>
+</body>
+</html>

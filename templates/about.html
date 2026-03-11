@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>about · downloader.wubly.run</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Syne:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d0d0d;
+            --border: #2a2a2a;
+            --text: #e8e8e8;
+            --muted: #555;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Mono', monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        .wrapper {
+            width: 100%;
+            max-width: 480px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 400;
+            font-size: 1.9rem;
+            letter-spacing: -0.03em;
+            margin-bottom: 32px;
+        }
+        .support {
+            list-style: none;
+        }
+        .support li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+        .support li:last-child {
+            border-bottom: none;
+        }
+        a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.72rem;
+        }
+        a:hover { color: var(--text); }
+        .back { margin-top: 32px; }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="main">
+            <h1>about</h1>
+            <p style="color: var(--muted); font-size: 0.8rem; margin-bottom: 24px;">supported platforms</p>
+            <ul class="support">
+                <li>Instagram</li>
+                <li>TikTok</li>
+            </ul>
+            <a href="/" class="back">← back</a>
+        </div>
+    </div>
+</body>
+</html>
