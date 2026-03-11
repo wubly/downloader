@@ -8,6 +8,10 @@ def detect_platform(url):
         return 'tiktok'
     if 'instagram.com' in url or 'instagr.am' in url:
         return 'reels'
+    if 'youtube.com' in url or 'youtu.be' in url:
+        return 'youtube'
+    if 'twitter.com' in url or 'x.com' in url:
+        return 'twitter'
     return None
 
 def is_valid_url(url):
