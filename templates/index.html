@@ -238,6 +238,13 @@
             clearBtn.style.display = url.value.trim() ? 'flex' : 'none';
         };
 
+        url.onkeydown = function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                f.requestSubmit();
+            }
+        };
+
         clearBtn.onclick = function() {
             url.value = '';
             clearBtn.style.display = 'none';
