@@ -20,6 +20,8 @@ def detect_platform(url):
         return 'vimeo'
     if 'facebook.com' in url or 'fb.com' in url or 'fb.watch' in url or 'fb.reel' in url:
         return 'facebook'
+    if 'soundcloud.com' in url:
+        return 'soundcloud'
     return None
 
 def is_valid_url(url):

@@ -1,6 +1,6 @@
 # downloader.wubly.run
 
-download videos from tiktok, instagram, youtube, twitter, pinterest, reddit, vimeo, facebook. 
+download videos and audio from tiktok, instagram, youtube, twitter, pinterest, reddit, vimeo, facebook, soundcloud. no login. 
 
 ## run
 
@@ -14,5 +14,5 @@ uvicorn main:app --reload
 ```
 POST /dl
 body: url (form)
-returns: video file
+returns: video or audio file
 ```
