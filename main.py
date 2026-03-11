@@ -20,6 +20,10 @@ async def index(request: Request):
 async def about(request: Request):
     return templates.TemplateResponse('about.html', {'request': request})
 
+@app.get('/api', response_class=HTMLResponse)
+async def api_docs(request: Request):
+    return templates.TemplateResponse('api.html', {'request': request})
+
 @app.post('/dl')
 async def dl(url: str = Form(...)):
     if not is_valid_url(url):

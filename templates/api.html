@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>api · downloader.wubly.run</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Syne:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d0d0d;
+            --border: #2a2a2a;
+            --text: #e8e8e8;
+            --muted: #555;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Mono', monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        .wrapper {
+            width: 100%;
+            max-width: 520px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 400;
+            font-size: 1.9rem;
+            letter-spacing: -0.03em;
+            margin-bottom: 32px;
+        }
+        .endpoint {
+            margin-bottom: 28px;
+        }
+        .method {
+            font-size: 0.7rem;
+            color: var(--muted);
+            letter-spacing: 0.08em;
+            margin-bottom: 4px;
+        }
+        .path {
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+        .param {
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+        .param span { color: var(--text); }
+        .code {
+            background: #161616;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 0.72rem;
+            overflow-x: auto;
+            margin: 12px 0;
+        }
+        .platforms {
+            font-size: 0.72rem;
+            color: var(--muted);
+            margin-top: 24px;
+        }
+        a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.72rem;
+        }
+        a:hover { color: var(--text); }
+        .back { margin-top: 32px; }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="main">
+            <h1>api</h1>
+
+            <div class="endpoint">
+                <div class="method">post</div>
+                <div class="path">/dl</div>
+                <div class="param">body: <span>url</span> (form-urlencoded)</div>
+                <div class="code">curl -X POST -d "url=https://..." https://downloader.wubly.run/dl -o video.mp4</div>
+                <div class="param">returns: video file or json error</div>
+            </div>
+
+            <div class="platforms">
+                tiktok · instagram · youtube · twitter
+            </div>
+
+            <a href="/" class="back">← back</a>
+        </div>
+    </div>
+</body>
+</html>
