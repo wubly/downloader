@@ -8,7 +8,6 @@ def download(url):
         'outtmpl': os.path.join(tmp, '%(id)s.%(ext)s'),
         'quiet': True,
         'no_warnings': True,
-        'format': 'best[ext=mp4]/best[ext=webm]/best',
     }
     with yt_dlp.YoutubeDL(opts) as ydl:
         info = ydl.extract_info(url, download=True)
