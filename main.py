@@ -7,7 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from misc.utils import detect_platform, is_valid_url
-from platforms import tiktok, reels, youtube, twitter
+from platforms import tiktok, reels, youtube, twitter, pinterest, reddit, vimeo, facebook
 
 app = FastAPI(title='downloader.wubly.run')
 templates = Jinja2Templates(directory='templates')
@@ -35,17 +35,14 @@ async def dl(url: str = Form(...)):
     if not platform:
         return JSONResponse(
             status_code=400,
-            content={'ok': False, 'error': 'tiktok, instagram, youtube, twitter only'}
+            content={'ok': False, 'error': 'unsupported platform'}
         )
+    handlers = {
+        'tiktok': tiktok, 'reels': reels, 'youtube': youtube, 'twitter': twitter,
+        'pinterest': pinterest, 'reddit': reddit, 'vimeo': vimeo, 'facebook': facebook,
+    }
     try:
-        if platform == 'tiktok':
-            path, title = tiktok.download(url)
-        elif platform == 'reels':
-            path, title = reels.download(url)
-        elif platform == 'youtube':
-            path, title = youtube.download(url)
-        else:
-            path, title = twitter.download(url)
+        path, title = handlers[platform].download(url)
     except Exception as e:
         return JSONResponse(
             status_code=500,

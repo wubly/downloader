@@ -12,6 +12,14 @@ def detect_platform(url):
         return 'youtube'
     if 'twitter.com' in url or 'x.com' in url:
         return 'twitter'
+    if 'pinterest.com' in url or 'pin.it' in url:
+        return 'pinterest'
+    if 'reddit.com' in url or 'redd.it' in url:
+        return 'reddit'
+    if 'vimeo.com' in url:
+        return 'vimeo'
+    if 'facebook.com' in url or 'fb.com' in url or 'fb.watch' in url or 'fb.reel' in url:
+        return 'facebook'
     return None
 
 def is_valid_url(url):

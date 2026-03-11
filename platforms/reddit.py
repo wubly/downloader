@@ -18,4 +18,4 @@ def download(url):
         if not files:
             raise Exception('no file downloaded')
         path = os.path.join(tmp, files[0])
-        return path, info.get('title', 'reel') or 'reel'
+        return path, info.get('title', 'reddit') or 'reddit'

@@ -8,7 +8,10 @@ def download(url):
         'outtmpl': os.path.join(tmp, '%(id)s.%(ext)s'),
         'quiet': True,
         'no_warnings': True,
-        'format': 'best[ext=mp4]/best[ext=webm]/best',
+        'http_headers': {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Referer': 'https://www.pinterest.com/',
+        },
     }
     with yt_dlp.YoutubeDL(opts) as ydl:
         info = ydl.extract_info(url, download=True)
@@ -18,4 +21,4 @@ def download(url):
         if not files:
             raise Exception('no file downloaded')
         path = os.path.join(tmp, files[0])
-        return path, info.get('title', 'reel') or 'reel'
+        return path, info.get('title', 'pinterest') or 'pinterest'
