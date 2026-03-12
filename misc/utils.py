@@ -22,6 +22,8 @@ def detect_platform(url):
         return 'facebook'
     if 'soundcloud.com' in url:
         return 'soundcloud'
+    if 'spotify.com' in url or 'spotify.link' in url:
+        return 'spotify'
     return None
 
 def is_valid_url(url):

@@ -1,6 +1,6 @@
 # downloader.wubly.run
 
-download videos and audio from tiktok, instagram, youtube, twitter, pinterest, reddit, vimeo, facebook, soundcloud. no login. 
+download videos and audio from tiktok, instagram, youtube, twitter, pinterest, reddit, vimeo, facebook, soundcloud. optional spotify (flac, needs ffmpeg). no login. 
 
 ## run
 
@@ -8,6 +8,8 @@ download videos and audio from tiktok, instagram, youtube, twitter, pinterest, r
 pip install -r requirements.txt
 uvicorn main:app --reload
 ```
+
+spotify: set `SPOTIFY_ENABLED = True` in main.py. requires ffmpeg for flac. use at your own risk – against spotify tos.
 
 ## api
 
